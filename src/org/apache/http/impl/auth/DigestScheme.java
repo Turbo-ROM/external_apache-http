@@ -207,7 +207,13 @@ public class DigestScheme extends RFC2617Scheme {
             rv = true;
             nafName = new String(s);
         }
-        this.log.debug("realm:"+words[0]+","+words[1]);
+        String str = "realm:";
+        if (words.length > 1){
+            str = str + words[0] + "," + words[1];
+        } else {
+            str = str + "null";
+        }
+        this.log.debug(str);
         return rv;
     }
 
