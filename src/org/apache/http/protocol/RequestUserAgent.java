@@ -77,21 +77,14 @@ public class RequestUserAgent implements HttpRequestInterceptor {
                 if (useragent != null) sb.append("; ");
                 sb.append(gbaUserAgent);
             }
-            if(useragent != null || gbaUserAgent != null) {
-                request.addHeader(HTTP.USER_AGENT, sb.toString());
-            }
+            if(useragent != null || gbaUserAgent != null) request.addHeader(HTTP.USER_AGENT, sb.toString());
         } else {
             String useragent = request.getFirstHeader(HTTP.USER_AGENT).getValue();
-            boolean isGbaSet = false;
-            if(useragent != null){
-                isGbaSet = useragent.contains("3gpp-gba");
-            }
+            boolean isGbaSet = useragent.contains("3gpp-gba");
             if(gbaUserAgent != null && !isGbaSet) {
                 StringBuilder sb = new StringBuilder();
-                if ( useragent != null ) {
-                    sb.append(useragent);
-                    sb.append("; ");
-                }
+                sb.append(useragent);
+                sb.append("; ");
                 sb.append(gbaUserAgent);
                 request.setHeader(HTTP.USER_AGENT,sb.toString());
             }
